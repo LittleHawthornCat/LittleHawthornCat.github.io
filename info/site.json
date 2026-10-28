@@ -1,0 +1,148 @@
+{
+  "site": {
+    "lang": "zh-CN",
+    "title": "朱Эньчжэн · 个人橱窗"
+  },
+  "brand": "NO.042 / ENCODE",
+  "nav": [
+    { "target": "hero",    "label": "首页" },
+    { "target": "archive", "label": "档案" },
+    { "target": "works",   "label": "工程" },
+    { "target": "journal", "label": "日志" },
+    { "target": "contact", "label": "通讯" }
+  ],
+  "hero": {
+    "tags": [
+      { "text": "2008 — ",        "variant": "solid" },
+      { "text": "实践哲学",           "variant": "red" },
+      { "text": "萌芽主义",           "variant": "" },
+      { "text": "№ 42 · 认知观测站",  "variant": "" }
+    ],
+    "titleCn": "朱",
+    "titleCy": "Эньчжэн",
+    "lede": "在实然与应然之间工作。相信虚无可以承载建构，也相信一个认知系统应该保持开放——被审视、被打破、被重构。",
+    "hint": "СПУСК · 点击左侧，拉开抽屉"
+  },
+  "archive": {
+    "label": "01 / АРХИВ",
+    "title": "档案",
+    "subtitle": "АРХИВ",
+    "stamp": { "main": "已归档", "sub": "ARCHIVED" },
+    "intro": [
+      "我目前是一个<strong>大学生</strong>，在文学和乐理之中沉醉，在计算机科学、社会科学、认知科学以及哲学之间反复横跳。我习惯于认真对待每一个命题，每一个选择，每一份批评。",
+      "我长期着迷于马克思主义的结构分析、萨特存在主义的决断以及福柯的规训理论：那些敢于解剖现实、直面虚无，却又试图重建意义的图纸。我不会将它们断言为终极真理，但它们带着“直面荒诞，看清结构，重构自我”的勇气与智慧，渐渐成为雕琢我精神内核的工具箱。",
+      "目前以学生和独立开发者的身份，在混沌中练习自编码，在寻找前行的方向，也在沿途留下热爱的痕迹。"
+    ],
+    "cards": [
+      {
+        "slug": "ai-explorer",
+        "no": "No.014", "date": "持续更新",
+        "title": "AI 探索者",
+        "desc": "对大型语言模型与自我意识可能性的探索，试图书写一条关于“模拟主体”与“自编码”的边界。",
+        "footLeft": "COGNITION", "footRight": "无限项"
+      },
+      {
+        "slug": "deep-thinker",
+        "no": "No.013", "date": "持续更新",
+        "title": "沉思者",
+        "desc": "关于马克思主义、存在主义、解构主义的交叉思考，致力于在碎片化的实然中寻找维持存在的叙事。",
+        "footLeft": "PHILOSOPHY", "footRight": "深度项"
+      },
+      {
+        "slug": "music-lover",
+        "no": "No.012", "date": "持续更新",
+        "title": "音乐爱好者",
+        "desc": "电子、日系摇滚、华语流行。在感性的高频震荡中，寻找对抗理性疲软的听觉锚点。",
+        "footLeft": "SENSORY", "footRight": "循环项"
+      },
+      {
+        "slug": "social-observer",
+        "no": "No.011", "date": "持续更新",
+        "title": "社会观察者",
+        "desc": "对权力、规训、功绩社会及内卷机制的切片分析，观察结构如何在个体身上留下痛觉与痕迹。",
+        "footLeft": "STRUCTURE", "footRight": "多维项"
+      }
+    ]
+  },
+  "works": {
+    "label": "02 / ПРОЕКТ",
+    "title": "工程",
+    "subtitle": "ПРОЕКТ",
+    "desc": "正在建造与已经落成的系统。逻辑、参数、状态、进度，选择性公开陈列。",
+    "items": [
+      {
+        "slug": "bomb-boardgame",
+        "no": "01", "name": "炸弹桌游", "nameEn": "Bomb Boardgame",
+        "tag": "Web · Stratefy", "year": "2026", "status": "测试中"
+      },
+      {
+        "slug": "interstellar-war",
+        "no": "02", "name": "星际战争游戏", "nameEn": "Interstellar War",
+        "tag": "Unity · Strategy", "year": "2026", "status": "建造中"
+      },
+      {
+        "slug": "epidemic-sim",
+        "no": "03", "name": "拟真疾控游戏", "nameEn": "Epidemic Simulation",
+        "tag": "Godot · System", "year": "2026", "status": "进行中"
+      },
+      {
+        "slug": "medical-website",
+        "no": "04", "name": "医疗网站", "nameEn": "Medical Portal",
+        "tag": "Web · Frontend", "year": "2026", "status": "已投产"
+      }
+    ]
+  },
+  "journal": {
+    "label": "03 / ЖУРНАЛ",
+    "title": "日志",
+    "subtitle": "ЖУРНАЛ",
+    "desc": "一份持续印刷的思想刊物与文学作品。记录思维的推演与灵感的凝结。",
+    "lead": {
+      "slug": "praxis-cycle",
+      "meta": ["置顶", "2025.10.12", "PRAXIS"],
+      "title": "实践哲学的疑破立返循环",
+      "excerpt": "从认知失调的“疑”，到解构旧范式的“破”，在虚无中经受考验，随后建构新认知的“立”，最终在现实中完成检验的“返”。这是我应对存在危机与认知内耗的底层操作系统。",
+      "tags": ["#实践哲学"]
+    },
+    "items": [
+      {
+        "slug": "marx-existentialism",
+        "no": "No.041", "date": "2026.07.28",
+        "title": "马克思主义和存在主义的和解",
+        "desc": "自由选择的前提是历史情境的约束，而实践性的可知论则是对边界最有力的还击。",
+        "tags": ["#主体性"]
+      },
+      {
+        "slug": "reason-emotion",
+        "no": "No.040", "date": "2025.09.10",
+        "title": "理性与感性的联盟",
+        "desc": "理性并不是为了消灭感性，而是试图把感性体验从“就是如此”的迷茫，转变成“我为什么会这样”的觉察。",
+        "tags": ["#认知科学"]
+      },
+      {
+        "slug": "deconstruction-tool",
+        "no": "No.039", "date": "2025.08.22",
+        "title": "解构是工具——不是敌人也不是朋友",
+        "desc": "解构是中性的，如果权威和合理性被消解了，那是理论自己的问题，而不是解构的过错。",
+        "tags": ["#解构主义"]
+      }
+    ]
+  },
+  "contact": {
+    "label": "СВЯЗЬ · TRANSMISSION",
+    "title": "建立联络",
+    "desc": "如果有哲学探讨的兴趣、游戏开发的合作，或者一个还没有名字的认知困境，欢迎发来信号。我通常会在两个昼夜内回复。",
+    "email": "email@domain.com",
+    "links": [
+      { "label": "GITHUB",  "value": "@LittleHawthornCat",  "href": "#" },
+      { "label": "即刻",     "value": "@",         "href": "#" },
+      { "label": "B站", "value": "@可燃冰森林",    "href": "#" },
+      { "label": "电报",     "value": "@", "href": "#" }
+    ]
+  },
+  "footer": {
+    "left": "© 2024 存在 · ENCODE",
+    "center": "萌芽主义 · 认知观测站 № 42",
+    "highlight": "意义的意义，是维持存在"
+  }
+}
