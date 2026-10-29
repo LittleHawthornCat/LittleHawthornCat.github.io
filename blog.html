@@ -3,103 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>阅读 - Blog</title>
+  <title>日志 · 阅读</title>
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
   
   <style>
-    /* 覆盖原本的绝对定位，改用 Flex 布局 */
-    body { overflow: hidden; }
-    .blog-layout { display: flex; height: 100vh; width: 100vw; }
+    /* 覆盖原本的全屏布局，保留全局导航的空间 */
+    body { overflow: hidden; background: var(--paper); }
+    .blog-layout { margin-left: var(--nav-w); height: 100vh; overflow-y: auto; position: relative; }
     
-    /* 左侧文章列表 */
-    .blog-aside {
-      width: 300px; flex-shrink: 0;
-      background: var(--paper-warm);
-      border-right: 1px solid var(--ink);
-      display: flex; flex-direction: column;
-      z-index: 10;
-    }
-    .blog-aside-header {
-      padding: 24px; border-bottom: 2px solid var(--ink);
+    /* 顶部悬浮操作栏 */
+    .reader-topbar {
+      position: fixed; top: 0; right: 0; left: var(--nav-w); height: 70px;
       display: flex; justify-content: space-between; align-items: center;
+      padding: 0 clamp(20px, 5vw, 60px);
+      background: linear-gradient(to bottom, var(--paper) 60%, transparent);
+      z-index: 100; pointer-events: none;
     }
-    .blog-aside-header h2 { font-family: var(--font-display); font-size: 20px; font-weight: 900; margin: 0; }
-    .back-btn {
-      font-family: var(--font-mono); font-size: 11px; text-decoration: none;
-      color: var(--ink); border: 1px solid var(--ink); padding: 4px 8px;
-      transition: all 0.3s;
-    }
-    .back-btn:hover { background: var(--ink); color: var(--paper); }
+    .reader-topbar * { pointer-events: auto; }
     
-    .blog-nav-list {
-      flex: 1; overflow-y: auto; padding: 16px;
-      scrollbar-width: thin;
+    /* 目录按钮 */
+    .btn-index {
+      font-family: var(--font-mono); font-size: 12px; font-weight: bold;
+      color: var(--ink); border: 1px solid var(--ink); padding: 8px 16px;
+      background: transparent; cursor: pointer; transition: all 0.3s;
+    }
+    .btn-index:hover { background: var(--ink); color: var(--paper); }
+    
+    /* 阅读进度条 */
+    .reading-progress {
+      position: fixed; top: 0; left: var(--nav-w); height: 3px; background: var(--red);
+      width: 0%; z-index: 101; transition: width 0.1s;
+    }
+
+    /* 正文区域 */
+    .article-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 120px 24px 120px;
+      font-size: 17px;
+      line-height: 1.9;
+      color: var(--ink2);
+    }
+
+    /* 沉浸排版细节 */
+    .article-content h1 { font-family: var(--font-display); font-size: clamp(32px, 5vw, 48px); color: var(--ink); margin: 0 0 40px; line-height: 1.2; }
+    .article-content h2 { font-family: var(--font-display); font-size: 26px; color: var(--ink); margin: 1.8em 0 1em; border-bottom: 2px solid var(--red); padding-bottom: 8px; }
+    .article-content h3 { font-family: var(--font-display); font-size: 20px; color: var(--ink); margin: 1.5em 0 0.8em; }
+    .article-content p { margin-bottom: 1.5em; }
+    .article-content a { color: var(--red); text-decoration: none; border-bottom: 1px dashed var(--red); }
+    .article-content blockquote { border-left: 4px solid var(--red); padding-left: 20px; margin: 2em 0; color: var(--ink3); font-style: italic; font-size: 1.1em; }
+    .article-content pre { background: var(--paper-warm); padding: 20px; border-radius: 8px; overflow-x: auto; border: 1px solid rgba(0,0,0,0.1); }
+    .article-content code { font-family: var(--font-mono); background: rgba(192,39,28,0.05); padding: 2px 6px; border-radius: 4px; color: var(--red); }
+    .article-content pre code { background: none; color: #24292e; }
+
+    /* ===== 核心：全屏毛玻璃目录浮层 ===== */
+    .index-overlay {
+      position: fixed; inset: 0; left: var(--nav-w); z-index: 200;
+      background: rgba(228, 220, 199, 0.85); /* 纸张色 + 透明度 */
+      backdrop-filter: blur(8px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    }
+    .index-overlay.show { opacity: 1; pointer-events: auto; }
+    
+    .overlay-inner {
+      max-width: 800px; width: 90%; max-height: 70vh; overflow-y: auto;
+      padding: 40px;
     }
     
-    /* 分类与文章项 */
-    .nav-group { margin-bottom: 24px; }
+    .overlay-title {
+      font-family: var(--font-mono); font-size: 12px; color: var(--red);
+      letter-spacing: 0.2em; margin-bottom: 30px; border-bottom: 1px dashed var(--red); padding-bottom: 10px;
+    }
+
+    .nav-group { margin-bottom: 30px; }
     .nav-group-title {
-      font-family: var(--font-mono); font-size: 11px; color: var(--red);
-      letter-spacing: 0.1em; margin-bottom: 8px; padding-bottom: 4px;
-      border-bottom: 1px dashed var(--red);
+      font-family: var(--font-mono); font-size: 13px; color: var(--ink3);
+      margin-bottom: 12px; letter-spacing: 0.1em;
     }
     .nav-item {
-      display: block; padding: 10px 12px; margin-bottom: 4px;
-      text-decoration: none; color: var(--ink2); font-size: 14px; font-weight: 500;
-      border-left: 3px solid transparent; transition: all 0.2s;
-      line-height: 1.4;
+      display: block; font-family: var(--font-display); font-size: 20px; font-weight: 700;
+      color: var(--ink); text-decoration: none; padding: 12px 0;
+      border-bottom: 1px solid rgba(23,22,26,0.1);
+      transition: all 0.2s; cursor: pointer;
     }
-    .nav-item:hover { background: rgba(192,39,28,0.05); color: var(--red); }
-    .nav-item.active { background: var(--ink); color: var(--paper); border-left-color: var(--red); }
-
-    /* 右侧内容区 */
-    .blog-main {
-      flex: 1; overflow-y: auto; background: var(--paper);
-      padding: 60px clamp(20px, 5vw, 80px);
-      position: relative;
-    }
-    .article-content { max-width: 850px; margin: 0 auto; }
-    
-    /* 排版细节 */
-    .article-content h1, .article-content h2, .article-content h3 { color: var(--ink); font-family: var(--font-display); margin: 1.5em 0 0.8em; }
-    .article-content h1 { font-size: 2.2em; border-bottom: 3px solid var(--red); padding-bottom: 12px; }
-    .article-content p { font-size: 16px; line-height: 1.9; color: var(--ink2); margin-bottom: 1.2em; }
-    .article-content a { color: var(--red); text-decoration: none; border-bottom: 1px dashed var(--red); }
-    .article-content blockquote { border-left: 4px solid var(--red); padding-left: 16px; color: var(--ink3); font-style: italic; margin: 1.5em 0; }
-    .article-content pre { background: #f6f8fa; padding: 16px; border-radius: 8px; overflow-x: auto; border: 1px solid rgba(23,22,26,0.1); }
-    .article-content code { font-family: var(--font-mono); font-size: 0.9em; background: rgba(192, 39, 28, 0.05); padding: 2px 6px; border-radius: 4px; color: var(--red); }
-    .article-content pre code { background: none; padding: 0; color: #24292e; }
-
-    /* 移动端适配 */
-    @media (max-width: 768px) {
-      .blog-layout { flex-direction: column; }
-      .blog-aside { width: 100%; height: 30vh; border-right: none; border-bottom: 2px solid var(--ink); }
-      .blog-main { padding: 30px 20px; }
-    }
+    .nav-item:hover { color: var(--red); padding-left: 10px; }
+    .nav-item.active { color: var(--red); }
   </style>
 </head>
 <body>
 
-  <div class="blog-layout">
-    <!-- 左侧文章列表 -->
-    <aside class="blog-aside">
-      <div class="blog-aside-header">
-        <h2>目录 / LIST</h2>
-        <a href="./index.html" class="back-btn">← 返回</a>
-      </div>
-      <div class="blog-nav-list" id="blogNavList">
-        <div class="loading-text">正在读取目录...</div>
-      </div>
-    </aside>
+  <!-- 全局导航栏 -->
+<nav class="sidebar" style="view-transition-name: sidebar;">
+  <div class="sidebar-brand">АРХИВ · NO.042</div>
+  <div class="sidebar-nav">
+    <!-- 无论点哪个，都回 index.html，并带上对应的 target 哈希 -->
+    <a href="index.html">首页</a>
+    <a href="index.html#archive">档案</a>
+    <a href="index.html#works">工程</a>
+    <a href="index.html#journal">日志</a>
+    <!-- 通讯在你原来的配置里可能也是回首页 -->
+    <a href="index.html#contact">通讯</a>
+  </div>
+  <div class="sidebar-mark"></div>
+</nav>
 
-    <!-- 右侧阅读区 -->
-    <main class="blog-main">
-      <article id="article-container" class="article-content">
-        <div class="loading-text">SELECT AN ARTICLE...</div>
-      </article>
-    </main>
+  <!-- 进度条 -->
+  <div class="reading-progress" id="progressBar"></div>
+
+  <!-- 顶部栏 -->
+  <div class="reader-topbar">
+    <div style="font-family: var(--font-mono); font-size: 12px; color: var(--ink3);" id="currentTitle">正在载入...</div>
+    <button class="btn-index" id="btnIndex">目录 / INDEX</button>
+  </div>
+
+  <!-- 正文 -->
+  <div class="blog-layout" id="blogLayout">
+    <article class="article-content" id="article-container">
+      <div class="loading-text" style="color:var(--red); font-family:var(--font-mono);">正在拉取墨迹...</div>
+    </article>
+  </div>
+
+  <!-- 目录浮层 -->
+  <div class="index-overlay" id="indexOverlay">
+    <div class="overlay-inner" id="overlayInner">
+      <div class="overlay-title">全部卷宗 / ARCHIVE INDEX</div>
+      <div id="navList"></div>
+    </div>
   </div>
 
   <!-- 依赖 -->
@@ -107,7 +139,6 @@
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <script src="./js/show_markdown.js"></script>
-  <!-- 引入新写的 blog.js -->
   <script src="./js/blog.js"></script>
 </body>
 </html>

@@ -1,0 +1,9 @@
+{
+  "comment": "音乐库清单。把文件放进 music/ 后，把文件名追加到 tracks 即可。命名格式：类别 - 艺术家 - 曲名.扩展名；类别前缀：rock=摇滚，ele=电子，pop=流行，其余=其他。",
+  "tracks": [
+    "ele - Marshmello_Leah Culver - Fly.flac",
+    "rock - Ave Mujica - Imprisoned XII.ogg",
+    "rock - Ave Mujica - KiLLKiSS.ogg",
+    "rock - MyGO!!!!! - 影色舞.ogg"
+  ]
+}

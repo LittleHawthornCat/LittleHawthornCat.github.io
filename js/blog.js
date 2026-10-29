@@ -1,151 +1,134 @@
 // js/blog.js
-
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('article-container');
-  const navList = document.getElementById('blogNavList');
-  
-  // 获取 URL 参数
-  const urlParams = new URLSearchParams(window.location.search);
-  const currentSlug = urlParams.get('slug') || urlParams.get('id');
+  const blogLayout = document.getElementById('blogLayout');
+  const progressBar = document.getElementById('progressBar');
+  const overlay = document.getElementById('indexOverlay');
+  const navList = document.getElementById('navList');
+  const currentTitleEl = document.getElementById('currentTitle');
 
-  // 1. 加载索引数据
+  // URL 参数
+  const urlParams = new URLSearchParams(window.location.search);
+  let currentSlug = urlParams.get('slug');
+
+  // 滚动进度
+  blogLayout.addEventListener('scroll', () => {
+    const max = blogLayout.scrollHeight - blogLayout.clientHeight;
+    progressBar.style.width = max > 0 ? `${(blogLayout.scrollTop / max) * 100}%` : '0%';
+  });
+
+  // 目录开关
+  document.getElementById('btnIndex').addEventListener('click', () => {
+    overlay.classList.toggle('show');
+  });
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) overlay.classList.remove('show'); // 点击空白处关闭
+  });
+
+  // 1. 获取数据
+  let articles = [];
   try {
     const res = await fetch('./info/site.json', { cache: 'no-store' });
     const data = await res.json();
-    
-    // 合并 journal.lead 和 journal.items
-    let articles = [];
     if (data.journal) {
       if (data.journal.lead) articles.push(data.journal.lead);
       if (data.journal.items) articles = articles.concat(data.journal.items);
     }
 
-    renderSidebar(articles, currentSlug);
-    
-    // 如果没有传 slug，默认加载第一篇文章
+    buildIndex(articles, currentSlug);
+
+    // 如果没有指定文章，默认加载第一篇
     if (!currentSlug && articles.length > 0) {
-      const firstSlug = articles[0].slug || articles[0].id || articles[0].no;
-      // 不刷新页面，直接替换 URL 并加载
-      history.replaceState(null, '', `?slug=${encodeURIComponent(firstSlug)}`);
-      loadArticle(firstSlug);
-    } else if (currentSlug) {
+      currentSlug = articles[0].slug || articles[0].id || articles[0].no;
+      history.replaceState(null, '', `?slug=${encodeURIComponent(currentSlug)}`);
+    }
+    
+    if (currentSlug) {
       loadArticle(currentSlug);
     } else {
-      container.innerHTML = '<div class="loading-text" style="color:var(--red)">暂无文章。请在 site.json 中添加 journal 数据。</div>';
+      container.innerHTML = '<div style="text-align:center; padding: 50px;">暂无文章</div>';
     }
 
   } catch (err) {
     console.error(err);
-    navList.innerHTML = '<div style="color:red; padding:20px;">无法加载 site.json 数据</div>';
-    container.innerHTML = '<div style="color:red; padding:20px;">目录加载失败，请确保通过 HTTP 服务器访问。</div>';
+    container.innerHTML = '<div style="color:red;">加载目录失败</div>';
   }
-});
 
-/**
- * 按第一标签分类渲染左侧导航
- */
-function renderSidebar(articles, currentSlug) {
-  const navList = document.getElementById('blogNavList');
-  navList.innerHTML = '';
-
-  // 根据 tags[0] 分组
-  const groups = {};
-  articles.forEach(art => {
-    // 取第一个标签，如果没有则归为“未分类”
-    const tag = (art.tags && art.tags.length > 0) ? art.tags[0] : '未分类';
-    if (!groups[tag]) groups[tag] = [];
-    groups[tag].push(art);
-  });
-
-  // 遍历组渲染 DOM
-  for (const tag in groups) {
-    const groupEl = document.createElement('div');
-    groupEl.className = 'nav-group';
-    groupEl.innerHTML = `<div class="nav-group-title">${tag}</div>`;
-
-    groups[tag].forEach(art => {
-      const slug = art.slug || art.id || art.no;
-      const title = art.title;
-      const isActive = slug === currentSlug ? 'active' : '';
-      
-      const a = document.createElement('a');
-      a.className = `nav-item ${isActive}`;
-      a.href = `?slug=${encodeURIComponent(slug)}`;
-      a.textContent = title;
-      
-      // 绑定点击事件（无刷新切换）
-      a.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // 更新左侧高亮状态
-        navList.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-        a.classList.add('active');
-
-        // 更新地址栏
-        history.pushState(null, '', `?slug=${encodeURIComponent(slug)}`);
-        document.title = `${title} - 博客`;
-        
-        // 加载文章
-        loadArticle(slug);
-      });
-
-      groupEl.appendChild(a);
+  // 2. 生成毛玻璃目录
+  function buildIndex(arts, activeSlug) {
+    const groups = {};
+    arts.forEach(art => {
+      const tag = (art.tags && art.tags.length > 0) ? art.tags[0] : '未分类';
+      if (!groups[tag]) groups[tag] = [];
+      groups[tag].push(art);
     });
-    navList.appendChild(groupEl);
-  }
-}
 
-/**
- * 加载并渲染 Markdown
- */
-async function loadArticle(slug) {
-  const container = document.getElementById('article-container');
-  container.innerHTML = '<div class="loading-text">正在加载文章...</div>';
-  
-  const filePath = `./article/blog/${slug}.md`;
-
-  try {
-    const response = await fetch(filePath);
-    if (!response.ok) throw new Error('NOT_FOUND');
-    
-    const text = await response.text();
-    
-    // 调用 show_markdown.js 的渲染方法
-    if (typeof renderMarkdownToHTML === 'function') {
-      container.innerHTML = renderMarkdownToHTML(text);
+    for (const tag in groups) {
+      const g = document.createElement('div');
+      g.className = 'nav-group';
+      g.innerHTML = `<div class="nav-group-title">${tag}</div>`;
       
-      // 高亮代码
+      groups[tag].forEach(art => {
+        const slug = art.slug || art.id || art.no;
+        const a = document.createElement('a');
+        a.className = `nav-item ${slug === activeSlug ? 'active' : ''}`;
+        a.textContent = art.title;
+        
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          overlay.classList.remove('show');
+          switchArticle(slug);
+        });
+        g.appendChild(a);
+      });
+      navList.appendChild(g);
+    }
+  }
+
+  // 3. 无刷新切换文章
+  function switchArticle(slug) {
+    currentSlug = slug;
+    history.pushState(null, '', `?slug=${encodeURIComponent(slug)}`);
+    loadArticle(slug);
+
+    // 更新目录高亮
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    const activeItem = Array.from(document.querySelectorAll('.nav-item')).find(el => el.textContent === articles.find(a => (a.slug || a.id || a.no) === slug)?.title);
+    if (activeItem) activeItem.classList.add('active');
+  }
+
+  // 4. 加载内容
+  async function loadArticle(slug) {
+    container.innerHTML = '<div style="color:var(--red);">正在拉取墨迹...</div>';
+    blogLayout.scrollTo({ top: 0, behavior: 'instant' });
+    
+    const art = articles.find(a => (a.slug || a.id || a.no) === slug);
+    currentTitleEl.textContent = art ? art.title : '阅读';
+    document.title = art ? `${art.title} · 日志` : '日志';
+
+    try {
+      const res = await fetch(`./article/blog/${slug}.md`);
+      if (!res.ok) throw new Error('NOT_FOUND');
+      const text = await res.text();
+      
+      container.innerHTML = (typeof renderMarkdownToHTML === 'function') 
+        ? renderMarkdownToHTML(text) 
+        : marked.parse(text);
+        
       container.querySelectorAll('pre code').forEach(el => {
         if (/\blanguage-[\w+#.-]+\b/.test(el.className)) hljs.highlightElement(el);
       });
-      
-      // 调整 iframe 高度
-      container.querySelectorAll('.html-frame iframe').forEach(iframe => {
-        iframe.onload = function() {
-          try {
-            const height = this.contentWindow.document.body.scrollHeight;
-            this.style.height = (height + 20) + 'px';
-          } catch (e) {}
-        }
-      });
-    } else {
-      container.innerHTML = marked.parse(text);
-    }
-
-    // 滚动右侧内容回顶部
-    document.querySelector('.blog-main').scrollTo({ top: 0, behavior: 'smooth' });
-
-  } catch (error) {
-    if (error.message === 'NOT_FOUND') {
-      container.innerHTML = `
-        <div style="text-align:center; padding: 60px 20px;">
-          <h2 style="color:var(--red); font-family:var(--font-display); font-size: 32px;">找不到文章</h2>
-          <p style="color:var(--ink2); margin-top:20px;">文件 <code>article/blog/${slug}.md</code> 不存在。</p>
-          <p style="color:var(--ink3); font-size: 13px;">开发者可能删除了这篇文章，或者还没有部署。</p>
-        </div>
-      `;
-    } else {
-      container.innerHTML = `<div style="color:red; padding:20px;">加载失败: ${error.message}</div>`;
+    } catch (err) {
+      container.innerHTML = `<h2 style="color:var(--red);">找不到这篇文章</h2><p>${slug}.md 可能已被删除。</p>`;
     }
   }
-}
+
+  // 支持浏览器前进后退
+  window.addEventListener('popstate', () => {
+    const s = new URLSearchParams(location.search).get('slug');
+    if (s && s !== currentSlug) {
+      currentSlug = s;
+      loadArticle(s);
+    }
+  });
+});

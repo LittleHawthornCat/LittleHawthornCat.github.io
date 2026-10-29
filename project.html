@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>工程 · ПРОЕКТ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 顶部滚动进度条 -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ================= 左侧导航栏 ================= -->
+<nav class="sidebar" style="view-transition-name: sidebar;">
+  <div class="sidebar-brand">АРХИВ · NO.042</div>
+  <div class="sidebar-nav">
+    <!-- 无论点哪个，都回 index.html，并带上对应的 target 哈希 -->
+    <a href="index.html">首页</a>
+    <a href="index.html#archive">档案</a>
+    <a href="index.html#works">工程</a>
+    <a href="index.html#journal">日志</a>
+    <!-- 通讯在你原来的配置里可能也是回首页 -->
+    <a href="index.html#contact">通讯</a>
+  </div>
+  <div class="sidebar-mark"></div>
+</nav>
+
+<main class="page-main" id="pageMain">
+
+  <!-- ================= 页首 ================= -->
+  <header class="proj-head">
+    <div class="sec-head" style="margin-bottom:0">
+      <div class="sec-label">02 / ПРОЕКТ · WORKS</div>
+      <h1 class="head-title">
+        <span class="big">工程</span>
+        <span class="cy">ПРОЕКТ</span>
+      </h1>
+      <div class="hero-rule"></div>
+      <p class="sec-desc" id="projDesc">正在调取图纸……</p>
+      <div class="proj-chips" id="projChips"></div>
+    </div>
+  </header>
+
+  <!-- ================= 图纸索引 + 详图 ================= -->
+  <div class="proj-layout">
+    <aside class="proj-aside">
+      <div class="proj-aside-head"><span>图纸索引 · INDEX</span><span id="projCount"></span></div>
+      <div id="projList">
+        <div class="loading-text">正在清点图纸……</div>
+      </div>
+    </aside>
+
+    <section class="proj-main">
+      <div class="proj-crumb">
+        <span>ПРОЕКТ / <span class="here" id="crumbHere">—</span></span>
+        <span id="crumbMeta"></span>
+      </div>
+      <article class="article-content" id="projBody">
+        <div class="loading-text">SELECT A BLUEPRINT...</div>
+      </article>
+    </section>
+  </div>
+
+  <footer class="footer-bar">
+    <span>© 2026 朱 · ENCODE</span>
+    <span>ПРОЕКТ · 生命观测站 № 42</span>
+    <span class="red">把图纸变成现实</span>
+  </footer>
+
+</main>
+
+<!-- 依赖 -->
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="./js/show_markdown.js"></script>
+<script src="./js/project.js"></script>
+</body>
+</html>

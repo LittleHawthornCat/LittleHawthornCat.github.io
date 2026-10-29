@@ -410,6 +410,27 @@ function initSite() {
   }
 
   updateProgress();
+  // 👈 替换成下面这版（去掉全局 style 注入，使用原生局部控制）
+  const hash = window.location.hash.replace('#', '');
+  if (hash && getPanel(hash)) {
+    const el = getPanel(hash);
+
+    // 1. 临时关掉这个面板的滑动过渡（只针对它自己，不重绘全屏）
+    el.style.transition = 'none';
+
+    // 2. 强行把面板打开
+    openStack.push(hash);
+    openPanelEl(hash);
+    updateNav();
+
+    // 3. 强制浏览器重排一次，确保面板瞬间就位
+    el.offsetHeight; 
+
+    // 4. 在下一帧立刻恢复过渡动画，这样你在 index 内部点其他面板就恢复正常了
+    requestAnimationFrame(() => {
+      el.style.transition = '';
+    });
+  }
 }
 
 /* ---------- 6. 启动 ---------- */
