@@ -30,7 +30,7 @@ function articleUrl(page, item, fallback) {
   const slug =
     item && (item.slug || item.id || item.no);
   const value = slug || fallback;
-  return `${page}?id=${encodeURIComponent(value)}`;
+  return `${page}?slug=${encodeURIComponent(value)}`;
 }
 
 /* ---------- 3. 分区渲染 ---------- */

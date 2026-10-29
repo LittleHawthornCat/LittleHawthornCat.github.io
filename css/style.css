@@ -1098,3 +1098,16 @@ body:not(.is-ready) .hero-hint {
   padding: 2px 6px;
   border-bottom: 1px solid var(--red);
 }
+/* ============================================================
+   13. markdown
+   ============================================================ */
+/* 居中大标题样式 */
+.center-title {
+  text-align: center;
+  font-size: 2.2em;
+  font-weight: 700;
+  margin: 1.5rem 0;
+  color: var(#011025);
+  font-family: var(--font-display);
+  border-bottom: none; /* 覆盖掉 h1 的可能样式 */
+}
