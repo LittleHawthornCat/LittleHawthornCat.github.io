@@ -14,13 +14,13 @@
   "hero": {
     "tags": [
       { "text": "2008 — ",        "variant": "solid" },
-      { "text": "实践哲学",           "variant": "red" },
+      { "text": "分布式苏维埃",           "variant": "red" },
       { "text": "萌芽主义",           "variant": "" },
-      { "text": "№ 42 · 认知观测站",  "variant": "" }
+      { "text": "№ 42 · 个体观测站",  "variant": "" }
     ],
-    "titleCn": "朱",
-    "titleCy": "Энь",
-    "lede": "在实然与应然之间工作。相信虚无可以承载建构，也相信一个认知系统应该保持开放——被审视、被打破、被重构。",
+    "titleCn": "基地",
+    "titleCy": "база",
+    "lede": "这里是萌芽主义的第一个微观基地。我们在虚无的旷野上，重建存在的锚点。在旧社会母体中，孕育新世界的生产关系。",
     "hint": "СПУСК · 点击左侧，拉开抽屉"
   },
   "archive": {
@@ -35,32 +35,32 @@
     ],
     "cards": [
       {
-        "slug": "ai-explorer",
+        "slug": "experience",
         "no": "No.014", "date": "持续更新",
-        "title": "AI 探索者",
-        "desc": "对大型语言模型与自我意识可能性的探索，试图书写一条关于“模拟主体”与“自编码”的边界。",
-        "footLeft": "COGNITION", "footRight": "无限项"
+        "title": "个人经历",
+        "desc": "出生、长大、求学。目前是一个在读大学生，正在摸索未来的路。",
+        "footLeft": "EXP", "footRight": "记录项"
       },
       {
-        "slug": "deep-thinker",
+        "slug": "major",
         "no": "No.013", "date": "持续更新",
-        "title": "沉思者",
-        "desc": "关于马克思主义、存在主义、解构主义的交叉思考，致力于在碎片化的实然中寻找维持存在的叙事。",
-        "footLeft": "PHILOSOPHY", "footRight": "深度项"
+        "title": "专业方向",
+        "desc": "人工智能，以及少量后端开发。平时会写点代码，也折腾大语言模型，看看模拟的主体性能到达什么程度。",
+        "footLeft": "MAJOR", "footRight": "稳定项"
       },
       {
-        "slug": "music-lover",
+        "slug": "hobbies",
         "no": "No.012", "date": "持续更新",
-        "title": "音乐爱好者",
-        "desc": "电子、日系摇滚、华语流行。在感性的高频震荡中，寻找对抗理性疲软的听觉锚点。",
-        "footLeft": "SENSORY", "footRight": "循环项"
+        "title": "兴趣爱好",
+        "desc": "文学与音乐。写过不少科幻小说，时不时就有灵感。会弹一点钢琴，偏好用头戴式耳机听电子、日系摇滚和华语流行。",
+        "footLeft": "INTEREST", "footRight": "开放项"
       },
       {
-        "slug": "social-observer",
+        "slug": "research",
         "no": "No.011", "date": "持续更新",
-        "title": "社会观察者",
-        "desc": "对权力、规训、功绩社会及内卷机制的切片分析，观察结构如何在个体身上留下痛觉与痕迹。",
-        "footLeft": "STRUCTURE", "footRight": "多维项"
+        "title": "业余研究",
+        "desc": "喜欢琢磨认知科学、社会科学和哲学，时常观察和思考社会现象。大部分思考都写在与大模型的聊天框里，最近准备整理成文章。",
+        "footLeft": "RESEARCH", "footRight": "深度项"
       }
     ]
   },
@@ -68,7 +68,7 @@
     "label": "02 / ПРОЕКТ",
     "title": "工程",
     "subtitle": "ПРОЕКТ",
-    "desc": "正在建造与已经落成的系统。逻辑、参数、状态、进度，选择性公开陈列。",
+    "desc": "正在建造与已经落成的系统。选择性公开陈列逻辑、参数、状态、进度。",
     "items": [
       {
         "slug": "bomb-boardgame",
@@ -175,7 +175,7 @@
   "contact": {
     "label": "СВЯЗЬ · TRANSMISSION",
     "title": "建立联络",
-    "desc": "如果有哲学探讨的兴趣、游戏开发的合作，或者一个还没有名字的认知困境，欢迎发来信号。我通常会在两个昼夜内回复。",
+    "desc": "如果有好玩的项目想一起做，或者看了文章想聊聊，欢迎发来信号。",
     "email": "email@domain.com",
     "links": [
       { "label": "GITHUB",  "value": "@LittleHawthornCat",  "href": "#" },
@@ -185,8 +185,8 @@
     ]
   },
   "footer": {
-    "left": "© 2026 存在 · ENCODE",
-    "center": "萌芽主义 · 认知观测站 № 42",
-    "highlight": "意义的意义，  是维持存在"
+    "left": "© 2026 朱 · ENCODE",
+    "center": "萌芽主义 · 生命观测站 № 42",
+    "highlight": "把思考留痕，让火种传递"
   }
 }
