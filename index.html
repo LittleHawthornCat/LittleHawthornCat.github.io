@@ -3,197 +3,219 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title></title>
+<title>基地 · база</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- 顶部滚动进度条 -->
-<div class="progress-bar" id="progressBar"></div>
-
-<!-- ================= 左侧导航栏 ================= -->
+<!-- ================= 左侧导航栏（位于 #swup 之外，Swup 跳转时保持常驻） ================= -->
 <nav class="sidebar">
-  <div class="sidebar-brand" id="sidebarBrand"></div>
-  <div class="sidebar-nav" id="sidebarNav"></div>
+  <div class="sidebar-brand" id="sidebarBrand">NO.042 / ENCODE</div>
+  <div class="sidebar-nav" id="sidebarNav">
+    <a href="index.html">首页</a>
+    <a href="index.html#archive">档案</a>
+    <a href="index.html#works">工程</a>
+    <a href="index.html#journal">日志</a>
+    <a href="index.html#contact">通讯</a>
+  </div>
   <div class="sidebar-mark"></div>
 </nav>
 
-<!-- ================= 面板舞台 ================= -->
-<div class="stage">
+<!-- ================= Swup 内容容器 ================= -->
+<div id="swup" class="transition-slide">
 
-  <!-- 底层面板：Hero -->
-  <section class="panel panel--base" id="hero">
-    <div class="panel-inner">
-      <div class="hero">
-        <div class="hero-bg-grid"></div>
-        <div class="hero-wedge"></div>
+  <!-- 顶部滚动进度条 -->
+  <div class="progress-bar" id="progressBar"></div>
 
-        <div class="hero-orbit-clipper">
-          <div class="hero-orbit-wrap">
-            <div class="hero-orbit-float" id="heroOrbitFloat">
-              <div class="hero-orbit-outer"></div>
-              <div class="hero-orbit-inner"></div>
+  <!-- ================= 面板舞台 ================= -->
+  <div class="stage">
+
+    <!-- 底层面板：Hero -->
+    <section class="panel panel--base" id="hero">
+      <div class="panel-inner">
+        <div class="hero">
+          <div class="hero-bg-grid"></div>
+          <div class="hero-wedge"></div>
+
+          <div class="hero-orbit-clipper">
+            <div class="hero-orbit-wrap">
+              <div class="hero-orbit-float" id="heroOrbitFloat">
+                <div class="hero-orbit-outer"></div>
+                <div class="hero-orbit-inner"></div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- ===== 土星 Logo ===== -->
-        <div class="hero-logo-wrap" id="heroLogo">
-          <svg class="logo-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Saturn Logo">
-            <defs>
-              <mask id="crescentMask" maskUnits="userSpaceOnUse">
-                <rect x="0" y="0" width="400" height="400" fill="black"/>
-                <circle cx="200" cy="200" r="90" fill="white"/>
-                <circle cx="188" cy="188" r="87" fill="black"/>
-              </mask>
-              <mask id="hidePlanet" maskUnits="userSpaceOnUse">
-                <rect x="0" y="0" width="400" height="400" fill="white"/>
-                <circle cx="200" cy="200" r="90" fill="black"/>
-              </mask>
-              <clipPath id="frontHalf" clipPathUnits="userSpaceOnUse">
-                <rect x="0" y="185" width="400" height="215"/>
-              </clipPath>
-              <clipPath id="backHalf" clipPathUnits="userSpaceOnUse">
-                <rect x="0" y="0" width="400" height="185"/>
-              </clipPath>
-              <mask id="ringCutout" maskUnits="userSpaceOnUse">
-                <rect x="0" y="0" width="400" height="400" fill="white"/>
-                <ellipse cx="199" cy="198" rx="180" ry="15" fill="black"/>
-              </mask>
-              <clipPath id="rightOnly" clipPathUnits="userSpaceOnUse">
-                <rect x="200" y="0" width="200" height="400"/>
-              </clipPath>
-              <mask id="hammerMask" maskUnits="userSpaceOnUse">
-                <rect x="100" y="150" width="200" height="100" fill="white" />
-                <polygon points="170,100 290,100 370,200 250,200" fill="black" />
-              </mask>
-              <mask id="redMask" maskUnits="userSpaceOnUse">
-                <rect x="147" y="104" width="112" height="137" fill="white" />
-                <ellipse cx="93" cy="125" rx="200" ry="93" fill="black" />
-              </mask>
-            </defs>
+          <!-- ===== 土星 Logo ===== -->
+          <div class="hero-logo-wrap" id="heroLogo">
+            <svg class="logo-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Saturn Logo">
+              <defs>
+                <mask id="crescentMask" maskUnits="userSpaceOnUse">
+                  <rect x="0" y="0" width="400" height="400" fill="black"/>
+                  <circle cx="200" cy="200" r="90" fill="white"/>
+                  <circle cx="188" cy="188" r="87" fill="black"/>
+                </mask>
+                <mask id="hidePlanet" maskUnits="userSpaceOnUse">
+                  <rect x="0" y="0" width="400" height="400" fill="white"/>
+                  <circle cx="200" cy="200" r="90" fill="black"/>
+                </mask>
+                <clipPath id="frontHalf" clipPathUnits="userSpaceOnUse">
+                  <rect x="0" y="185" width="400" height="215"/>
+                </clipPath>
+                <clipPath id="backHalf" clipPathUnits="userSpaceOnUse">
+                  <rect x="0" y="0" width="400" height="185"/>
+                </clipPath>
+                <mask id="ringCutout" maskUnits="userSpaceOnUse">
+                  <rect x="0" y="0" width="400" height="400" fill="white"/>
+                  <ellipse cx="199" cy="198" rx="180" ry="15" fill="black"/>
+                </mask>
+                <clipPath id="rightOnly" clipPathUnits="userSpaceOnUse">
+                  <rect x="200" y="0" width="200" height="400"/>
+                </clipPath>
+                <mask id="hammerMask" maskUnits="userSpaceOnUse">
+                  <rect x="100" y="150" width="200" height="100" fill="white" />
+                  <polygon points="170,100 290,100 370,200 250,200" fill="black" />
+                </mask>
+                <mask id="redMask" maskUnits="userSpaceOnUse">
+                  <rect x="147" y="104" width="112" height="137" fill="white" />
+                  <ellipse cx="93" cy="125" rx="200" ry="93" fill="black" />
+                </mask>
+              </defs>
 
-            <g clip-path="url(#rightOnly)">
-              <g mask="url(#hidePlanet)">
+              <g clip-path="url(#rightOnly)">
+                <g mask="url(#hidePlanet)">
+                  <g transform="rotate(22 200 200)">
+                    <g clip-path="url(#backHalf)">
+                      <ellipse cx="200" cy="200" rx="190" ry="20" fill="var(--gold)" mask="url(#ringCutout)" />
+                    </g>
+                  </g>
+                </g>
+              </g>
+
+              <circle cx="200" cy="200" r="90" fill="var(--red)" />
+              <circle cx="200" cy="200" r="90" fill="var(--gold)" mask="url(#crescentMask)" />
+
+              <g transform="translate(269 225) rotate(17) scale(0.3) translate(-203 -172.5)">
+                <rect x="147" y="104" width="112" height="137" fill="var(--red)" mask="url(#redMask)" />
+              </g>
+
+              <g transform="translate(196 215) rotate(-71) scale(0.16) translate(-200 -200)">
+                <rect x="100" y="150" width="200" height="100" fill="var(--gold)" mask="url(#hammerMask)" />
+              </g>
+
+              <g clip-path="url(#rightOnly)">
                 <g transform="rotate(22 200 200)">
-                  <g clip-path="url(#backHalf)">
+                  <g clip-path="url(#frontHalf)">
                     <ellipse cx="200" cy="200" rx="190" ry="20" fill="var(--gold)" mask="url(#ringCutout)" />
                   </g>
                 </g>
               </g>
-            </g>
+            </svg>
+          </div>
 
-            <circle cx="200" cy="200" r="90" fill="var(--red)" />
-            <circle cx="200" cy="200" r="90" fill="var(--gold)" mask="url(#crescentMask)" />
+          <div class="hero-content">
+            <div class="hero-tags" id="heroTags"></div>
 
-            <g transform="translate(269 225) rotate(17) scale(0.3) translate(-203 -172.5)">
-              <rect x="147" y="104" width="112" height="137" fill="var(--red)" mask="url(#redMask)" />
-            </g>
+            <h1 class="hero-title">
+              <span class="cn" id="heroTitleCn"></span>
+              <span class="cy" id="heroTitleCy"></span>
+            </h1>
 
-            <g transform="translate(196 215) rotate(-71) scale(0.16) translate(-200 -200)">
-              <rect x="100" y="150" width="200" height="100" fill="var(--gold)" mask="url(#hammerMask)" />
-            </g>
+            <div class="hero-rule"></div>
 
-            <g clip-path="url(#rightOnly)">
-              <g transform="rotate(22 200 200)">
-                <g clip-path="url(#frontHalf)">
-                  <ellipse cx="200" cy="200" rx="190" ry="20" fill="var(--gold)" mask="url(#ringCutout)" />
-                </g>
-              </g>
-            </g>
-          </svg>
+            <p class="hero-lede" id="heroLede"></p>
+          </div>
+
+          <div class="hero-hint" id="heroHint"></div>
         </div>
-
-        <div class="hero-content">
-          <div class="hero-tags" id="heroTags"></div>
-
-          <h1 class="hero-title">
-            <span class="cn" id="heroTitleCn"></span>
-            <span class="cy" id="heroTitleCy"></span>
-          </h1>
-
-          <div class="hero-rule"></div>
-
-          <p class="hero-lede" id="heroLede"></p>
-        </div>
-
-        <div class="hero-hint" id="heroHint"></div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 抽屉 01：档案 -->
-  <section class="panel panel--drawer panel--warm" id="archive" data-panel>
-    <div class="panel-inner">
-      <div class="wrap">
-        <div class="sec-head reveal">
-          <div class="sec-label" data-field="label"></div>
-          <h2 class="sec-title" data-field="title"></h2>
-          <div class="sec-subtitle" data-field="subtitle"></div>
-        </div>
-        <div class="floating-stamp stamp-reveal" id="archiveStamp"></div>
-        <div class="intro-block reveal" id="archiveIntro"></div>
-        <div class="archive-grid" id="archiveGrid"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 抽屉 02：工程 -->
-  <section class="panel panel--drawer" id="works" data-panel>
-    <div class="panel-inner">
-      <div class="wrap">
-        <div class="sec-head reveal">
-          <div class="sec-label" data-field="label"></div>
-          <h2 class="sec-title" data-field="title"></h2>
-          <div class="sec-subtitle" data-field="subtitle"></div>
-          <p class="sec-desc" data-field="desc"></p>
-        </div>
-        <div class="works-list" id="worksList"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 抽屉 03：日志 -->
-  <section class="panel panel--drawer panel--warm" id="journal" data-panel>
-    <div class="panel-inner">
-      <div class="wrap">
-        <div class="sec-head reveal">
-          <div class="sec-label" data-field="label"></div>
-          <h2 class="sec-title" data-field="title"></h2>
-          <div class="sec-subtitle" data-field="subtitle"></div>
-          <p class="sec-desc" data-field="desc"></p>
-        </div>
-        <div class="journal" id="journalList"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 抽屉 04：通讯 -->
-  <section class="panel panel--drawer panel--ink" id="contact" data-panel>
-    <div class="panel-inner">
-      <div class="contact-section">
-        <div class="contact-arcs"></div>
+    <!-- 抽屉 01：档案 -->
+    <section class="panel panel--drawer panel--warm" id="archive" data-panel>
+      <div class="panel-inner">
         <div class="wrap">
-          <div class="contact-inner">
-            <div class="reveal">
-              <div class="sec-label" id="contactLabel" style="color: var(--gold); margin-bottom: 20px;"></div>
-              <h2 class="contact-title" id="contactTitle"></h2>
-              <p class="contact-desc" id="contactDesc"></p>
-              <a href="#" class="contact-email" id="contactEmail"></a>
+          <div class="sec-head reveal">
+            <div class="sec-label" data-field="label"></div>
+            <h2 class="sec-title" data-field="title"></h2>
+            <div class="sec-subtitle" data-field="subtitle"></div>
+          </div>
+          <div class="floating-stamp stamp-reveal" id="archiveStamp"></div>
+          <div class="intro-block reveal" id="archiveIntro"></div>
+          <div class="archive-grid" id="archiveGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 抽屉 02：工程 -->
+    <section class="panel panel--drawer" id="works" data-panel>
+      <div class="panel-inner">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div class="sec-label" data-field="label"></div>
+            <h2 class="sec-title" data-field="title"></h2>
+            <div class="sec-subtitle" data-field="subtitle"></div>
+            <p class="sec-desc" data-field="desc"></p>
+          </div>
+          <div class="works-list" id="worksList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 抽屉 03：日志 -->
+    <section class="panel panel--drawer panel--warm" id="journal" data-panel>
+      <div class="panel-inner">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div class="sec-label" data-field="label"></div>
+            <h2 class="sec-title" data-field="title"></h2>
+            <div class="sec-subtitle" data-field="subtitle"></div>
+            <p class="sec-desc" data-field="desc"></p>
+          </div>
+          <div class="journal" id="journalList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 抽屉 04：通讯 -->
+    <section class="panel panel--drawer panel--ink" id="contact" data-panel>
+      <div class="panel-inner">
+        <div class="contact-section">
+          <div class="contact-arcs"></div>
+          <div class="wrap">
+            <div class="contact-inner">
+              <div class="reveal">
+                <div class="sec-label" id="contactLabel" style="color: var(--gold); margin-bottom: 20px;"></div>
+                <h2 class="contact-title" id="contactTitle"></h2>
+                <p class="contact-desc" id="contactDesc"></p>
+                <a href="#" class="contact-email" id="contactEmail"></a>
+              </div>
+              <div class="contact-links reveal" id="contactLinks" style="--reveal-delay: 0.15s;"></div>
             </div>
-            <div class="contact-links reveal" id="contactLinks" style="--reveal-delay: 0.15s;"></div>
           </div>
         </div>
+        <footer class="footer-bar" id="footerBar"></footer>
       </div>
-      <footer class="footer-bar" id="footerBar"></footer>
-    </div>
-  </section>
+    </section>
 
+  </div>
 </div>
 
-<script src="js/index.js"></script>
+<!-- ================= 全局依赖 & 页面逻辑（所有页面共用，由 main.js 分发） ================= -->
+<script src="https://cdn.jsdelivr.net/npm/swup@4.10.0/dist/Swup.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="./js/show_markdown.js"></script>
+<script src="./js/index.js"></script>
+<script src="./js/blog.js"></script>
+<script src="./js/about.js"></script>
+<script src="./js/project.js"></script>
+<script src="./js/main.js"></script>
 </body>
 </html>

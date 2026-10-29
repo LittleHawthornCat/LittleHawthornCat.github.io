@@ -13,182 +13,191 @@
 </head>
 <body>
 
-<!-- 顶部滚动进度条 -->
-<div class="progress-bar" id="progressBar"></div>
-
-<!-- ================= 左侧导航栏 ================= -->
-<nav class="sidebar" style="view-transition-name: sidebar;">
-  <div class="sidebar-brand">АРХИВ · NO.042</div>
+<!-- ================= 左侧导航栏（位于 #swup 之外，跳转时常驻） ================= -->
+<nav class="sidebar">
+  <div class="sidebar-brand">NO.042 / ENCODE</div>
   <div class="sidebar-nav">
-    <!-- 无论点哪个，都回 index.html，并带上对应的 target 哈希 -->
     <a href="index.html">首页</a>
     <a href="index.html#archive">档案</a>
     <a href="index.html#works">工程</a>
     <a href="index.html#journal">日志</a>
-    <!-- 通讯在你原来的配置里可能也是回首页 -->
     <a href="index.html#contact">通讯</a>
   </div>
   <div class="sidebar-mark"></div>
 </nav>
 
-<main class="page-main" id="pageMain">
+<!-- ================= Swup 内容容器 ================= -->
+<div id="swup" class="transition-slide">
 
-  <!-- ================= 页首：档案徽标 ================= -->
-  <header class="dossier-head">
-    <div class="hero-bg-grid"></div>
-    <div class="head-wedge"></div>
+  <!-- 顶部滚动进度条 -->
+  <div class="progress-bar" id="progressBar"></div>
 
-    <!-- ===== 台徽：广播唱片（非首页土星 Logo） ===== -->
-    <div class="head-emblem" aria-hidden="true">
-      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="广播唱片台徽">
-        <!-- 外侧虚线刻度环，缓慢自转 -->
-        <g>
-          <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="46s" repeatCount="indefinite"/>
-          <circle cx="100" cy="100" r="94" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="5 6"/>
-        </g>
-        <!-- 唱片本体 -->
-        <circle cx="100" cy="100" r="70" fill="var(--ink)"/>
-        <circle cx="100" cy="100" r="62" fill="none" stroke="rgba(232,197,90,0.35)" stroke-width="1"/>
-        <circle cx="100" cy="100" r="50" fill="none" stroke="rgba(232,197,90,0.3)" stroke-width="1"/>
-        <circle cx="100" cy="100" r="38" fill="none" stroke="rgba(232,197,90,0.3)" stroke-width="1"/>
-        <!-- 红色盘心 -->
-        <circle cx="100" cy="100" r="24" fill="var(--red)"/>
-        <!-- 盘心金星 -->
-        <polygon fill="var(--gold)" points="100,87 103.1,95.8 112.4,96 104.9,101.6 107.7,110.5 100,105.2 92.4,110.5 95.1,101.6 87.6,96 96.9,95.8"/>
-        <!-- 广播弧光 -->
-        <path d="M 120.2 24.7 A 78 78 0 0 1 175.4 79.8" fill="none" stroke="var(--gold)" stroke-width="2.5"/>
-        <path d="M 122.8 15.0 A 88 88 0 0 1 185.0 77.2" fill="none" stroke="var(--gold)" stroke-width="2.5"/>
-        <path d="M 124.8 7.3 A 96 96 0 0 1 192.7 75.2" fill="none" stroke="var(--gold)" stroke-width="2.5"/>
-        <circle cx="192.7" cy="75.2" r="3" fill="var(--gold)"/>
-      </svg>
-    </div>
+  <main class="page-main" id="pageMain">
 
-    <div class="head-content">
-      <div class="sec-label">01 / АРХИВ · DOSSIER</div>
-      <h1 class="head-title">
-        <span class="big">档案</span>
-        <span class="cy">АРХИВ</span>
-      </h1>
-      <div class="hero-rule"></div>
-      <p class="head-lede" id="headLede">正在调取卷宗……</p>
-      <div class="head-meta" id="headMeta">
-        <span class="red">已归档 · ARCHIVED</span>
-        <span>个体观测站 № 42</span>
-        <span>持续更新</span>
-      </div>
-    </div>
+    <!-- ================= 页首：档案徽标 ================= -->
+    <header class="dossier-head">
+      <div class="hero-bg-grid"></div>
+      <div class="head-wedge"></div>
 
-    <div class="floating-stamp stamp-reveal in" id="headStamp">
-      <span>已归档</span>
-      <small>ARCHIVED</small>
-    </div>
-  </header>
-
-  <!-- ================= 统计带 ================= -->
-  <section class="stats-band" id="statsBand" aria-label="统计信息">
-    <div class="stat-card">
-      <div class="stat-num"><span class="n" id="statWords">0</span><span class="unit">字</span></div>
-      <div class="stat-label">文学创作总字数 · СЛОВА</div>
-      <div class="stat-sub" id="statWordsSub">散文 + 小说</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num"><span class="n" id="statEss">0</span><span class="unit">篇</span></div>
-      <div class="stat-label">散文 · ESSAY</div>
-      <div class="stat-sub">ess- 序列</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num"><span class="n" id="statNov">0</span><span class="unit">篇</span></div>
-      <div class="stat-label">小说 · NOVEL</div>
-      <div class="stat-sub">nov- 序列</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num"><span class="n" id="statTracks">0</span><span class="unit">轨</span></div>
-      <div class="stat-label">馆藏音轨 · ФОНО</div>
-      <div class="stat-sub">music/ 目录</div>
-    </div>
-    <p class="stats-note">统计口径：article/blog/ 下 ess-（散文）与 nov-（小说）序列文章的实测字符数，计中日韩表意文字与西文单词，剔除代码块；音轨数取自 info/music.json 清单。</p>
-  </section>
-
-  <!-- ================= 档案文献 ================= -->
-  <section class="page-section" id="docs">
-    <div class="sec-head reveal">
-      <div class="sec-label">卷宗 / FILES</div>
-      <h2 class="sec-title" style="font-size:clamp(36px,5vw,64px)">档案文献</h2>
-      <div class="sec-subtitle">ДЕЛО · 四卷备查</div>
-    </div>
-    <div class="doc-tabs reveal" id="docTabs"></div>
-    <article class="doc-body article-content reveal" id="docBody">
-      <div class="loading-text">正在调阅卷宗……</div>
-    </article>
-  </section>
-
-  <!-- ================= 音乐库 ================= -->
-  <section class="page-section" id="musicSec">
-    <div class="sec-head reveal">
-      <div class="sec-label">ФОНОТЕКА / SOUND</div>
-      <h2 class="sec-title" style="font-size:clamp(36px,5vw,64px)">音乐库</h2>
-      <div class="sec-subtitle">馆藏声波 · 点击曲目开始广播</div>
-    </div>
-
-    <div class="music-grid reveal">
-      <!-- 收音机控制台 -->
-      <div class="radio" id="radio">
-        <div class="radio-top">
-          <span>РАДИО · 电台 NO.42</span>
-          <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-        </div>
-        <div class="radio-title" id="radioTitle">待 命</div>
-        <div class="radio-artist">
-          <span id="radioArtist">— 选择下方曲目开始广播 —</span>
-          <span class="radio-cat" id="radioCat" hidden></span>
-        </div>
-        <div class="radio-controls">
-          <button class="rbtn" id="btnPrev" aria-label="上一首">|◄</button>
-          <button class="rbtn rbtn-play" id="btnPlay" aria-label="播放 / 暂停">▶</button>
-          <button class="rbtn" id="btnNext" aria-label="下一首">►|</button>
-        </div>
-        <div class="radio-seek">
-          <span id="tCur">00:00</span>
-          <input type="range" class="rrange" id="seekBar" min="0" max="1000" value="0" aria-label="播放进度">
-          <span id="tDur">00:00</span>
-        </div>
-        <div class="radio-vol">
-          <span>音量 ГРОМКОСТЬ</span>
-          <input type="range" class="rrange" id="volBar" min="0" max="100" value="80" aria-label="音量">
-        </div>
-        <div class="radio-msg" id="radioMsg"></div>
+      <!-- ===== 台徽：广播唱片（非首页土星 Logo） ===== -->
+      <div class="head-emblem" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="广播唱片台徽">
+          <!-- 外侧虚线刻度环，缓慢自转 -->
+          <g>
+            <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="46s" repeatCount="indefinite"/>
+            <circle cx="100" cy="100" r="94" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="5 6"/>
+          </g>
+          <!-- 唱片本体 -->
+          <circle cx="100" cy="100" r="70" fill="var(--ink)"/>
+          <circle cx="100" cy="100" r="62" fill="none" stroke="rgba(232,197,90,0.35)" stroke-width="1"/>
+          <circle cx="100" cy="100" r="50" fill="none" stroke="rgba(232,197,90,0.3)" stroke-width="1"/>
+          <circle cx="100" cy="100" r="38" fill="none" stroke="rgba(232,197,90,0.3)" stroke-width="1"/>
+          <!-- 红色盘心 -->
+          <circle cx="100" cy="100" r="24" fill="var(--red)"/>
+          <!-- 盘心金星 -->
+          <polygon fill="var(--gold)" points="100,87 103.1,95.8 112.4,96 104.9,101.6 107.7,110.5 100,105.2 92.4,110.5 95.1,101.6 87.6,96 96.9,95.8"/>
+          <!-- 广播弧光 -->
+          <path d="M 120.2 24.7 A 78 78 0 0 1 175.4 79.8" fill="none" stroke="var(--gold)" stroke-width="2.5"/>
+          <path d="M 122.8 15.0 A 88 88 0 0 1 185.0 77.2" fill="none" stroke="var(--gold)" stroke-width="2.5"/>
+          <path d="M 124.8 7.3 A 96 96 0 0 1 192.7 75.2" fill="none" stroke="var(--gold)" stroke-width="2.5"/>
+          <circle cx="192.7" cy="75.2" r="3" fill="var(--gold)"/>
+        </svg>
       </div>
 
-      <!-- 类别配给 -->
-      <div class="quota-card" id="quotaCard">
-        <div class="quota-title"><span>类别配给 · RATION</span><span id="quotaTotal">共 0 轨</span></div>
-        <div class="quota-bar" id="quotaBar"></div>
-        <div class="quota-rows" id="quotaRows"></div>
+      <div class="head-content">
+        <div class="sec-label">01 / АРХИВ · DOSSIER</div>
+        <h1 class="head-title">
+          <span class="big">档案</span>
+          <span class="cy">АРХИВ</span>
+        </h1>
+        <div class="hero-rule"></div>
+        <p class="head-lede" id="headLede">正在调取卷宗……</p>
+        <div class="head-meta" id="headMeta">
+          <span class="red">已归档 · ARCHIVED</span>
+          <span>个体观测站 № 42</span>
+          <span>持续更新</span>
+        </div>
       </div>
-    </div>
 
-    <!-- 曲目清单 -->
-    <div class="track-filters reveal" id="trackFilters"></div>
-    <div class="track-list reveal" id="trackList">
-      <div class="loading-text">正在清点馆藏……</div>
-    </div>
-  </section>
+      <div class="floating-stamp stamp-reveal in" id="headStamp">
+        <span>已归档</span>
+        <small>ARCHIVED</small>
+      </div>
+    </header>
 
-  <footer class="footer-bar">
-    <span>© 2026 朱 · ENCODE</span>
-    <span>АРХИВ · 生命观测站 № 42</span>
-    <span class="red">已归档 · ARCHIVED</span>
-  </footer>
+    <!-- ================= 统计带 ================= -->
+    <section class="stats-band" id="statsBand" aria-label="统计信息">
+      <div class="stat-card">
+        <div class="stat-num"><span class="n" id="statWords">0</span><span class="unit">字</span></div>
+        <div class="stat-label">文学创作总字数 · СЛОВА</div>
+        <div class="stat-sub" id="statWordsSub">散文 + 小说</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num"><span class="n" id="statEss">0</span><span class="unit">篇</span></div>
+        <div class="stat-label">散文 · ESSAY</div>
+        <div class="stat-sub">ess- 序列</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num"><span class="n" id="statNov">0</span><span class="unit">篇</span></div>
+        <div class="stat-label">小说 · NOVEL</div>
+        <div class="stat-sub">nov- 序列</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num"><span class="n" id="statTracks">0</span><span class="unit">轨</span></div>
+        <div class="stat-label">馆藏音轨 · ФОНО</div>
+        <div class="stat-sub">music/ 目录</div>
+      </div>
+      <p class="stats-note">统计口径：article/blog/ 下 ess-（散文）与 nov-（小说）序列文章的实测字符数，计中日韩表意文字与西文单词，剔除代码块；音轨数取自 info/music.json 清单。</p>
+    </section>
 
-</main>
+    <!-- ================= 档案文献 ================= -->
+    <section class="page-section" id="docs">
+      <div class="sec-head reveal">
+        <div class="sec-label">卷宗 / FILES</div>
+        <h2 class="sec-title" style="font-size:clamp(36px,5vw,64px)">档案文献</h2>
+        <div class="sec-subtitle">ДЕЛО · 四卷备查</div>
+      </div>
+      <div class="doc-tabs reveal" id="docTabs"></div>
+      <article class="doc-body article-content reveal" id="docBody">
+        <div class="loading-text">正在调阅卷宗……</div>
+      </article>
+    </section>
 
-<audio id="audioEl" preload="metadata"></audio>
+    <!-- ================= 音乐库 ================= -->
+    <section class="page-section" id="musicSec">
+      <div class="sec-head reveal">
+        <div class="sec-label">ФОНОТЕКА / SOUND</div>
+        <h2 class="sec-title" style="font-size:clamp(36px,5vw,64px)">音乐库</h2>
+        <div class="sec-subtitle">馆藏声波 · 点击曲目开始广播</div>
+      </div>
 
-<!-- 依赖 -->
+      <div class="music-grid reveal">
+        <!-- 收音机控制台 -->
+        <div class="radio" id="radio">
+          <div class="radio-top">
+            <span>РАДИО · 电台 NO.42</span>
+            <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="radio-title" id="radioTitle">待 命</div>
+          <div class="radio-artist">
+            <span id="radioArtist">— 选择下方曲目开始广播 —</span>
+            <span class="radio-cat" id="radioCat" hidden></span>
+          </div>
+          <div class="radio-controls">
+            <button class="rbtn" id="btnPrev" aria-label="上一首">|◄</button>
+            <button class="rbtn rbtn-play" id="btnPlay" aria-label="播放 / 暂停">▶</button>
+            <button class="rbtn" id="btnNext" aria-label="下一首">►|</button>
+          </div>
+          <div class="radio-seek">
+            <span id="tCur">00:00</span>
+            <input type="range" class="rrange" id="seekBar" min="0" max="1000" value="0" aria-label="播放进度">
+            <span id="tDur">00:00</span>
+          </div>
+          <div class="radio-vol">
+            <span>音量 ГРОМКОСТЬ</span>
+            <input type="range" class="rrange" id="volBar" min="0" max="100" value="80" aria-label="音量">
+          </div>
+          <div class="radio-msg" id="radioMsg"></div>
+        </div>
+
+        <!-- 类别配给 -->
+        <div class="quota-card" id="quotaCard">
+          <div class="quota-title"><span>类别配给 · RATION</span><span id="quotaTotal">共 0 轨</span></div>
+          <div class="quota-bar" id="quotaBar"></div>
+          <div class="quota-rows" id="quotaRows"></div>
+        </div>
+      </div>
+
+      <!-- 曲目清单 -->
+      <div class="track-filters reveal" id="trackFilters"></div>
+      <div class="track-list reveal" id="trackList">
+        <div class="loading-text">正在清点馆藏……</div>
+      </div>
+    </section>
+
+    <footer class="footer-bar">
+      <span>© 2026 朱 · ENCODE</span>
+      <span>АРХИВ · 生命观测站 № 42</span>
+      <span class="red">已归档 · ARCHIVED</span>
+    </footer>
+
+  </main>
+
+  <!-- 播放器放在 #swup 内：切页时随内容一起销毁，abort 时再显式暂停 -->
+  <audio id="audioEl" preload="metadata"></audio>
+
+</div>
+
+<!-- ================= 全局依赖 & 页面逻辑（所有页面共用，由 main.js 分发） ================= -->
+<script src="https://cdn.jsdelivr.net/npm/swup@4.10.0/dist/Swup.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script src="./js/show_markdown.js"></script>
+<script src="./js/index.js"></script>
+<script src="./js/blog.js"></script>
 <script src="./js/about.js"></script>
+<script src="./js/project.js"></script>
+<script src="./js/main.js"></script>
 </body>
 </html>
