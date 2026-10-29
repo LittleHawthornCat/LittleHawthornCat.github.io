@@ -98,7 +98,7 @@
     "subtitle": "ЖУРНАЛ",
     "desc": "一份持续印刷的思想刊物与文学作品。记录思维的推演与灵感的凝结。",
     "lead": {
-      "slug": "praxis-cycle",
+      "slug": "arg-praxis-cycle",
       "meta": ["置顶", "2026.3.12", "PRAXIS"],
       "title": "实践哲学的疑破立返循环",
       "excerpt": "从认知失调的“疑”，到解构旧范式的“破”，在虚无中经受考验，随后建构新认知的“立”，最终在现实中完成检验的“返”。这是我应对存在危机与认知内耗的底层操作系统。",
@@ -106,7 +106,7 @@
     },
     "items": [
       {
-        "slug": "virtual-companionship-subjectivity",
+        "slug": "arg-virtual-companionship-subjectivity",
         "no": "No.036",
         "date": "2026.10.23",
         "title": "虚拟陪伴中的主体性分化",
@@ -114,54 +114,61 @@
         "tags": ["#议论","#虚拟陪伴", "#主体性"]
       },
       {
-        "slug": "marx-existentialism",
+        "slug": "arg-marx-existentialism",
         "no": "No.035", "date": "2026.9.28",
         "title": "马克思主义和存在主义的和解",
         "desc": "自由选择的前提是历史情境的约束，而实践性的可知论则是对边界最有力的还击。",
         "tags": ["#议论","#主体性"]
       },
       {
-        "slug": "reason-emotion",
+        "slug": "arg-reason-emotion",
         "no": "No.034", "date": "2026.09.10",
         "title": "理性与感性的联盟",
         "desc": "理性并不是为了消灭感性，而是试图把感性体验从“就是如此”的迷茫，转变成“我为什么会这样”的觉察。",
         "tags": ["#议论","#认知科学"]
       },
       {
-        "slug": "deconstruction-tool",
+        "slug": "arg-deconstruction-tool",
         "no": "No.033", "date": "2026.08.02",
         "title": "解构是工具——不是敌人也不是朋友",
         "desc": "解构是中性的，如果权威和合理性被消解了，那是理论自己的问题，而不是解构的过错。",
         "tags": ["#议论","#解构主义"]
       },
       {
-        "slug": "signature-wind",
+        "slug": "ess-signature-wind",
         "no": "No.032", "date": "2026.07.04",
         "title": "风的签名",
         "desc": "没有写下任何人名字的毕业致谢",
         "tags": ["#散文","#留白"]
       },
       {
-        "slug": "resonace-trap",
+        "slug": "arg-resonace-trap",
         "no": "No.031", "date": "2026.06.21",
         "title": "相似性共鸣的陷阱",
         "desc": "有共同创伤不代表能相互治愈。",
         "tags": ["#议论","#爱情观"]
       },
       {
-        "slug": "determinism-self-negation",
+        "slug": "arg-determinism-self-negation",
         "no": "No.030",
         "date": "2026.5.15",
         "title": "决定论必然通过否定自身实现自身",
-        "desc": "在物理层面，因果链条或许不可断裂；但在认知层面，生命必须以“仿佛自由”的姿态行动。这种否定不是对决定论的背叛，而是对它的完成。",
+        "desc": "在物理层面，因果链条或许不可断裂；但在认知层面，生命必须以“仿佛自由”的姿态行动。",
         "tags": ["#议论","#自由意志", "#决定论"]
       },
       {
-        "slug": "plant-flower",
+        "slug": "com-plant-flower",
         "no": "No.029", "date": "2026.05.10",
         "title": "种出种不出的花",
         "desc": "艺术的公共性与独特性相辅相成，我们不必复刻杰作，但不能丢失灵魂。",
         "tags": ["#习作","#艺术"]
+      },
+      {
+        "slug": "nov-whale-song",
+        "no": "No.025", "date": "2024.06.15",
+        "title": "鲸歌",
+        "desc": "当先遣队成为牺牲品",
+        "tags": ["#小说","#科幻","#星际殖民"]
       }
     ]
   },
@@ -178,7 +185,7 @@
     ]
   },
   "footer": {
-    "left": "© 2024 存在 · ENCODE",
+    "left": "© 2026 存在 · ENCODE",
     "center": "萌芽主义 · 认知观测站 № 42",
     "highlight": "意义的意义，  是维持存在"
   }
