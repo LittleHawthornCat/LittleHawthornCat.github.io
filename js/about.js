@@ -179,70 +179,77 @@
      3. 档案文献（选项卡阅读器）
      ============================================================ */
   function initDocs(cards, signal) {
-    const tabs = document.getElementById('docTabs');
-    const body = document.getElementById('docBody');
-    if (!tabs || !body) return;
+    const tabs = document.querySelectorAll('#mainTabs .main-tab');
+    const panes = document.querySelectorAll('.pane-content-wrap .tab-pane');
 
-    const docs = cards
-      .map(c => ({ slug: c.slug || c.id || c.no, title: c.title, no: c.no }))
-      .filter(d => d.slug);
+    function activateTab(tab) {
+      tabs.forEach(t => t.classList.toggle('active', t === tab));
+      panes.forEach(p => p.classList.toggle('active', p.id === tab.dataset.target));
+    }
 
-    docs.forEach(d => {
-      const b = document.createElement('button');
-      b.className = 'doc-tab';
-      b.dataset.slug = d.slug;
-      b.innerHTML = `<span class="no">${esc(d.no || '')}</span><span>${esc(d.title)}</span>`;
-      b.addEventListener('click', () => selectDoc(d.slug, true), { signal });
-      tabs.appendChild(b);
-    });
+    async function loadDocContent(tab, slug, push) {
+      const targetId = tab.dataset.target;
+      const pane = document.getElementById(targetId);
+      const body = pane ? pane.querySelector('.doc-article') : null;
 
-    async function selectDoc(slug, push) {
-      tabs.querySelectorAll('.doc-tab').forEach(t => t.classList.toggle('active', t.dataset.slug === slug));
-      const doc = docs.find(d => d.slug === slug);
-      if (doc) document.title = `${doc.title} · 档案`;
+      if (!body) return;
+      if (body.dataset.loaded === 'true') return;
+
       if (push) {
-        // 打上页面内部条目的标记，供 main.js 的 popstate 兜底识别
-        history.replaceState({ source: 'about-page', slug }, '', `?slug=${encodeURIComponent(slug)}`);
+        history.replaceState(
+          { source: 'about-page', slug },
+          '',
+          `?slug=${encodeURIComponent(slug)}`
+        );
       }
 
       body.innerHTML = '<div class="loading-text">正在调阅卷宗……</div>';
       try {
-        const res = await fetch(DOC_DIR + encodeURIComponent(slug) + '.md', { cache: 'no-store', signal });
+        const res = await fetch(DOC_DIR + encodeURIComponent(slug) + '.md', {
+          cache: 'no-store',
+          signal
+        });
         if (!res.ok) throw new Error('NOT_FOUND');
+
         const text = await res.text();
         if (signal.aborted) return;
 
         body.innerHTML = (typeof renderMarkdownToHTML === 'function')
           ? renderMarkdownToHTML(text)
           : marked.parse(text);
+
         body.querySelectorAll('pre code').forEach(el => {
           if (/\blanguage-[\w+#.-]+\b/.test(el.className)) hljs.highlightElement(el);
         });
+
+        body.dataset.loaded = 'true';
       } catch (e) {
         if (e.name === 'AbortError' || signal.aborted) return;
         body.innerHTML = `
           <div style="text-align:center; padding: 48px 20px;">
             <h2 style="color:var(--red); font-family:var(--font-display); font-size:28px;">卷宗缺失</h2>
-            <p style="color:var(--ink2); margin-top:16px;">文件 <code>article/about/${esc(slug)}.md</code> 不存在或无法读取。</p>
+            <p style="color:var(--ink2); margin-top:16px;">
+              文件 <code>article/about/${esc(slug)}.md</code> 不存在或无法读取。
+            </p>
           </div>`;
       }
     }
 
+    tabs.forEach((tab, index) => {
+      const doc = cards[index];
+      const slug = doc && (doc.slug || doc.id || doc.no);
+
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        activateTab(tab);
+        if (slug) loadDocContent(tab, slug, true);
+      }, { signal });
+    });
+
     const want = new URLSearchParams(location.search).get('slug');
-    const first = docs.some(d => d.slug === want) ? want : (docs[0] && docs[0].slug);
-    if (first) {
-      // 未带 slug 时补齐地址栏，保证刷新 / 前进后退时能回到同一卷宗
-      if (!want) {
-        history.replaceState(
-          { source: 'about-page', slug: first },
-          '',
-          `?slug=${encodeURIComponent(first)}`
-        );
-      }
-      selectDoc(first, false);
-    } else {
-      body.innerHTML = '<div class="loading-text">site.json 中没有 archive.cards 数据。</div>';
-    }
+    const initialIndex = cards.findIndex(c => (c.slug || c.id || c.no) === want);
+    const initialTab = (initialIndex >= 0 && tabs[initialIndex]) ? tabs[initialIndex] : tabs[0];
+    if (initialTab) initialTab.click();
   }
 
   /* ============================================================

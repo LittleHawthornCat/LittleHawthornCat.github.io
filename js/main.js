@@ -76,8 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 4. 钩子：新页面渲染完毕，挂载新逻辑
-  swup.hooks.on('page:view', () => {
-    initCurrentPage();
+  swup.hooks.on('page:view', (visit) => {
+    initCurrentPage(visit && visit.to ? visit.to.url : window.location.href);
   });
 
   // 5. popstate 兜底
@@ -103,9 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ============================================================
    页面分发器：根据当前 URL 决定执行哪个页面的 JS
    ============================================================ */
-function initCurrentPage() {
-  const path = window.location.pathname;
-  const hash = window.location.hash.replace('#', '');
+function initCurrentPage(url) {
+  const u = new URL(url || window.location.href, window.location.origin);
+  const path = u.pathname;
+  const hash = u.hash.replace('#', '');
   const signal = window.pageAbortController.signal;
 
   // 👈 初始化当前状态（离开首页时清空）
