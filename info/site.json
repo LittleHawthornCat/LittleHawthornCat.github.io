@@ -90,6 +90,11 @@
         "slug": "medical-website",
         "no": "04", "name": "医疗网站", "nameEn": "Medical Portal",
         "tag": "Web · Frontend", "year": "2026", "status": "已投产"
+      },
+      {
+        "slug": "ragdoll-tactics-squad",
+        "no": "05", "name": "布娃娃战术小队", "nameEn": "Ragdoll Tactics Squad",
+        "tag": "Web · Tactical Game", "year": "2026", "status": "测试中"
       }
     ]
   },
